@@ -178,6 +178,9 @@ body {
   align-items: center;
   justify-content: space-between;
 }
+.left-div img {
+  width: 35px;
+}
 .logo {
   color: #fff;
   font-size: 35px;
@@ -226,6 +229,9 @@ nav .nav-links ul li:hover {
   /* padding: 0 20px; */
   position: relative;
   display: flex;
+}
+.search-container img {
+  height: 27px;
 }
 .search-container input {
   background: #ffffff;
@@ -280,7 +286,7 @@ nav .nav-links ul li:hover {
   cursor: pointer;
 }
 .search-results-row img {
-  height: 27px;
+  width: 27px;
 }
 
 /* HOME AND FRIENDSLIST COMPONENT */
