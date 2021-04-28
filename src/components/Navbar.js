@@ -6,7 +6,7 @@ import { logoutUser } from "../actions/auth";
 
 class Navbar extends React.Component {
   logOut = () => {
-    // localStorage.removeItem("token");
+    localStorage.removeItem("token");
     this.props.dispatch(logoutUser());
   };
 
