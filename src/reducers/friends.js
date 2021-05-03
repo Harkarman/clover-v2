@@ -1,4 +1,3 @@
-import { bindActionCreators } from "redux";
 import { FETCH_FRIENDS_SUCCESS } from "../actions/actionTypes";
 
 const defaultProfileState = [];
