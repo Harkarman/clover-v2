@@ -3,12 +3,12 @@ import { connect } from "react-redux";
 import { fetchUserProfile } from "../actions/profile";
 import { APIUrls } from "../helpers/urls";
 import { getAuthTokenFromLocalStorage } from "../helpers/utils";
-import { addFriend } from "../actions/friends";
+import { addFriend, removeFriend } from "../actions/friends";
 
 class UserProfile extends Component {
   constructor(props) {
     super(props);
-    this.state = { success: null, error: null };
+    this.state = { success: null, error: null, successMessage: null };
   }
 
   componentDidMount() {
@@ -41,10 +41,29 @@ class UserProfile extends Component {
     const response = await fetch(url, options);
     const data = await response.json();
     if (data.success) {
-      this.setState({ success: true });
+      this.setState({ success: true, successMessage: "Friend added" });
       this.props.dispatch(addFriend(data.data.friendship));
     } else {
-      this.setState({ success: false, error: data.message });
+      this.setState({ success: null, error: data.message });
+    }
+  };
+  handleRemoveFriendClick = async () => {
+    const { match } = this.props;
+    const url = APIUrls.removeFriend(match.params.userId);
+    const options = {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/x-www-form-urlencoded",
+        Authorization: `Bearer ${getAuthTokenFromLocalStorage()}`,
+      },
+    };
+    const response = await fetch(url, options);
+    const data = await response.json();
+    if (data.success) {
+      this.setState({ success: true, successMessage: "Friend removed" });
+      this.props.dispatch(removeFriend(match.params.userId));
+    } else {
+      this.setState({ success: null, error: data.message });
     }
   };
 
@@ -59,7 +78,7 @@ class UserProfile extends Component {
       return <h1>Loading...</h1>;
     }
     const isUserAFriend = this.checkIfUserIsFriend();
-    const { success, error } = this.state;
+    const { success, error, successMessage } = this.state;
     return (
       <div className="settings">
         <div className="img-container">
@@ -85,12 +104,15 @@ class UserProfile extends Component {
               Add friend
             </button>
           ) : (
-            <button className="button save-btn">Remove friend</button>
+            <button
+              className="button save-btn"
+              onClick={this.handleRemoveFriendClick}
+            >
+              Remove friend
+            </button>
           )}
           {success && (
-            <div className="alert success-dialog">
-              Friend added successfully
-            </div>
+            <div className="alert success-dialog">{successMessage}</div>
           )}
           {error && <div className="alert error-dialog">{error}</div>}
         </div>
