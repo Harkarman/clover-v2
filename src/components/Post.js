@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { Comment } from "./";
-import { createComment } from "../actions/posts";
+import { createComment, addLike } from "../actions/posts";
 
 class Post extends Component {
   constructor(props) {
@@ -21,9 +21,14 @@ class Post extends Component {
   handleCommentChange = (e) => {
     this.setState({ comment: e.target.value });
   };
+  handlePostLike = () => {
+    const { post, user } = this.props;
+    this.props.dispatch(addLike(post._id, "Post", user._id));
+  };
   render() {
-    const { post } = this.props;
+    const { post, user } = this.props;
     const { comment } = this.state;
+    const isPostLikedByUser = post.likes.includes(user._id);
     return (
       <div className="post-wrapper" key={post._id}>
         <div className="post-header">
@@ -42,13 +47,20 @@ class Post extends Component {
         </div>
         <div className="post-content">{post.content}</div>
         <div className="post-actions">
-          <div className="post-like">
-            <img
-              src="https://image.flaticon.com/icons/svg/1077/1077035.svg"
-              alt="likes-icon"
-            />
+          <button className="post-like no-btn" onClick={this.handlePostLike}>
+            {isPostLikedByUser ? (
+              <img
+                src="https://image.flaticon.com/icons/svg/1076/1076984.svg"
+                alt="likes-icon"
+              />
+            ) : (
+              <img
+                src="https://image.flaticon.com/icons/svg/1077/1077035.svg"
+                alt="likes-icon"
+              />
+            )}
             <span>{post.likes.length}</span>
-          </div>
+          </button>
           <div className="post-comments-icon">
             <img
               src="https://image.flaticon.com/icons/svg/1380/1380338.svg"
@@ -77,4 +89,7 @@ class Post extends Component {
 }
 
 Post.propTypes = { post: PropTypes.object.isRequired };
-export default connect()(Post);
+function mapStateToProps({ auth }) {
+  return { user: auth.user };
+}
+export default connect(mapStateToProps)(Post);
