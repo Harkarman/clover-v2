@@ -1,4 +1,6 @@
 import PostsList from "./PostsList";
+import Post from "./Post";
+import Comment from "./Comment";
 import App from "./App";
 import Navbar from "./Navbar";
 import Home from "./Home";
@@ -13,6 +15,8 @@ import CreatePost from "./CreatePost";
 
 export {
   PostsList,
+  Post,
+  Comment,
   App,
   Navbar,
   Home,
