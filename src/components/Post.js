@@ -33,16 +33,26 @@ class Post extends Component {
       <div className="post-wrapper" key={post._id}>
         <div className="post-header">
           <div className="post-avatar">
-            <Link to={`/user/${post.user._id}`}>
-              <img
-                src="https://image.flaticon.com/icons/svg/2154/2154651.svg"
-                alt="user-pic"
-              />
-            </Link>
+            {post.user._id === user._id ? (
+              <Link to="/settings">
+                <img
+                  src="https://image.flaticon.com/icons/svg/2154/2154651.svg"
+                  alt="user-dp"
+                  id="user-dp"
+                />
+              </Link>
+            ) : (
+              <Link to={`/user/${post.user._id}`}>
+                <img
+                  src="https://image.flaticon.com/icons/svg/2154/2154651.svg"
+                  alt="user-pic"
+                />
+              </Link>
+            )}
           </div>
           <div>
-            <span className="post-author">{post.user.name}</span>
-            <span className="post-time">A minute ago</span>
+            <span className="post-author">{post.user.name}</span>&nbsp;&nbsp;
+            <small className="post-time">{post.createdAt}</small>
           </div>
         </div>
         <div className="post-content">{post.content}</div>
