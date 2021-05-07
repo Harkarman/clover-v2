@@ -28,3 +28,6 @@ export const REMOVE_FRIEND = "REMOVE_FRIEND";
 export const ADD_POST = "ADD_POST";
 export const ADD_COMMENT = "ADD_COMMENT";
 export const TOGGLE_POST_LIKE = "TOGGLE_POST_LIKE";
+
+//* Search
+export const FETCH_SEARCH_RESULTS_SUCCESS = "FETCH_SEARCH_RESULTS_SUCCESS";

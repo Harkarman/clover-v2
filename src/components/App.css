@@ -225,7 +225,7 @@ nav .nav-links ul li:hover {
   cursor: pointer;
 }
 .search-container {
-  flex-grow: 0.5;
+  flex-grow: 0.3;
   /* padding: 0 20px; */
   position: relative;
   display: flex;
@@ -266,7 +266,7 @@ nav .nav-links ul li:hover {
   max-height: 452px;
   overflow: scroll;
   scrollbar-width: none;
-  display: none;
+  /* display: none; */
 }
 .search-results::-webkit-scrollbar {
   display: none;
