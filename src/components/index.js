@@ -12,6 +12,7 @@ import UserProfile from "./UserProfile";
 import FriendsList from "./FriendsList";
 import FriendsListItem from "./FriendsListItem";
 import CreatePost from "./CreatePost";
+import Chat from "./Chat";
 
 export {
   PostsList,
@@ -28,4 +29,5 @@ export {
   FriendsList,
   FriendsListItem,
   CreatePost,
+  Chat,
 };
